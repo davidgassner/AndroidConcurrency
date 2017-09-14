@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     // View object references
     private ScrollView mScroll;
     private TextView mLog;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the logging components
         mScroll = (ScrollView) findViewById(R.id.scrollLog);
         mLog = (TextView) findViewById(R.id.tvLog);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
         mLog.setText(R.string.lorem_ipsum);
     }
 
@@ -51,5 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 mScroll.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
+    }
+
+    @SuppressWarnings("unused")
+    private void displayProgressBar(boolean display) {
+        if (display) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 }
