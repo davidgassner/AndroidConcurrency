@@ -39,12 +39,19 @@ public class MainActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "run: runnable complete");
-                displayProgressBar(false);
+                Log.i(TAG, "run: starting thread for 4 seconds");
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.i(TAG, "run: ending thread");
             }
         };
-        Handler handler = new Handler();
-        handler.postDelayed(runnable, 3000);
+//        Handler handler = new Handler();
+//        handler.postDelayed(runnable, 3000);
+        Thread thread = new Thread(runnable);
+        thread.start();
 
     }
 
