@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mLog;
     private ProgressBar mProgressBar;
 
+    private boolean mInProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         mLog.setText(R.string.lorem_ipsum);
+        displayProgressBar(false );
     }
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
         log("Running code");
+        displayProgressBar(!mInProgress);
+        mInProgress = !mInProgress;
     }
 
     //  Clear the output, called from the onClick event in the layout file
@@ -57,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressWarnings("unused")
     private void displayProgressBar(boolean display) {
         if (display) {
             mProgressBar.setVisibility(View.VISIBLE);
