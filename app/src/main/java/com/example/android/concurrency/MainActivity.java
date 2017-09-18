@@ -1,5 +1,6 @@
 package com.example.android.concurrency;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
+        MyTask task = new MyTask();
+        task.execute("Red", "Green", "Blue");
+        MyTask task2 = new MyTask();
+        task2.execute("Pink", "Orange", "Purple");
+
     }
 
     //  Clear the output, called from the onClick event in the layout file
@@ -66,4 +72,21 @@ public class MainActivity extends AppCompatActivity {
             mProgressBar.setVisibility(View.INVISIBLE);
         }
     }
+
+    class MyTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            for (String value :
+                    strings) {
+                Log.i(TAG, "doInBackground: " + value);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+    }
+
 }
