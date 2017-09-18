@@ -48,28 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
-
-        log("Running code");
-        displayProgressBar(true);
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                Log.i(TAG, "run: starting thread for 4 seconds");
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Message message = new Message();
-                Bundle bundle = new Bundle();
-                bundle.putString(MESSAGE_KEY, "thread is complete");
-                message.setData(bundle);
-                mHandler.sendMessage(message);
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-
+        // Create executor service
     }
 
     //  Clear the output, called from the onClick event in the layout file
