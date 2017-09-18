@@ -86,12 +86,17 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return null;
+            return "thread all done!";
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
             log(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            log(s);
         }
     }
 
