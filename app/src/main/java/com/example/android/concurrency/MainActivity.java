@@ -1,7 +1,6 @@
 package com.example.android.concurrency;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "run: ending thread");
             }
         };
-//        Handler handler = new Handler();
-//        handler.postDelayed(runnable, 3000);
         Thread thread = new Thread(runnable);
         thread.start();
 
