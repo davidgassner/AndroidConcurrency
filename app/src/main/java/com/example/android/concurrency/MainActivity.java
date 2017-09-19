@@ -8,6 +8,8 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.android.concurrency.services.MyIntentService;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "CodeRunner";
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
         log("Running code");
+        MyIntentService.startActionFoo(this, "Value 1", "Value 2");
     }
 
     //  Clear the output, called from the onClick event in the layout file
