@@ -44,4 +44,8 @@ public class MyService extends Service {
         Log.i(TAG, "onUnbind: service");
         return super.onUnbind(intent);
     }
+
+    public String getAValue() {
+        return "from the service";
+    }
 }
