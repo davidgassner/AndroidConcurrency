@@ -1,5 +1,9 @@
 package com.example.android.concurrency;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "CodeRunner";
+    public static final int JOB_ID = 1001;
 
     // View object references
     private ScrollView mScroll;
@@ -32,7 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
-        log("Running code");
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(
+                Context.JOB_SCHEDULER_SERVICE);
+        JobInfo jobInfo = new JobInfo.Builder(JOB_ID,
+                new ComponentName(this, MyJobService.class))
+                .setMinimumLatency(0)
+                .build();
+        jobScheduler.schedule(jobInfo);
     }
 
     //  Clear the output, called from the onClick event in the layout file
