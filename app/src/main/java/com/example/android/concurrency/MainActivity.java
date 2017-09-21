@@ -8,6 +8,15 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.android.concurrency.model.DataItem;
+import com.example.android.concurrency.services.MyWebService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "CodeRunner";
@@ -32,7 +41,26 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
-        log("Running code!");
+        MyWebService myWebService =
+                MyWebService.retrofit.create(MyWebService.class);
+        Call<List<DataItem>> call = myWebService.dataItems();
+        call.enqueue(new Callback<List<DataItem>>() {
+            @Override
+            public void onResponse(Call<List<DataItem>> call, Response<List<DataItem>> response) {
+                if (response.isSuccessful()) {
+                    for (DataItem item :
+                            response.body()) {
+                        log(item.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DataItem>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     //  Clear the output, called from the onClick event in the layout file
