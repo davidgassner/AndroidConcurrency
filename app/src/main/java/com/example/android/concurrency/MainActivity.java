@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
-        log("Running code");
+        log("Running code!");
     }
 
     //  Clear the output, called from the onClick event in the layout file
