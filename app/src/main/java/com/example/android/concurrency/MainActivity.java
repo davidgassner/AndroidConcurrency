@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mLog;
     private ProgressBar mProgressBar;
 
-    private boolean mInProgress;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
         log("Running code");
-        displayProgressBar(!mInProgress);
-        mInProgress = !mInProgress;
     }
 
     //  Clear the output, called from the onClick event in the layout file
