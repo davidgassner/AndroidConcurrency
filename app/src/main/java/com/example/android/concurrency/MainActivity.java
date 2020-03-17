@@ -8,6 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "CodeRunner";
@@ -16,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView mScroll;
     private TextView mLog;
     private ProgressBar mProgressBar;
+
+    ExecutorService mExecutor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +33,25 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         mLog.setText(R.string.lorem_ipsum);
+
+        //TODO: instantiate Executor, create pool of 5 threads that can be executed concurrently
+        mExecutor = Executors.newFixedThreadPool(5);
+    }
+
+    //TODO: cleanly shutdown Executor
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mExecutor.shutdown();
     }
 
     //  Run some code, called from the onClick event in the layout file
     public void runCode(View v) {
         // Create executor service
+        for (int i = 0; i < 10; i++) {
+            Runnable worker = new BackgroundTask(i);
+            mExecutor.execute(worker);
+        }
     }
 
     //  Clear the output, called from the onClick event in the layout file
