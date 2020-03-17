@@ -86,12 +86,19 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return null;
+            //TODO: can return string since we declared the return value in AsyncTask as String
+            return "thread all done";
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
             log(values[0]);
+        }
+
+        //TODO: for each task we will send the "thread all done message" to the UI
+        @Override
+        protected void onPostExecute(String s) {
+            log(s);
         }
     }
 
